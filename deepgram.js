@@ -1,12 +1,8 @@
-const fs = require("fs");
 const { Deepgram } = require("@deepgram/sdk");
-
-// Your Deepgram API Key
-const deepgramApiKey = "9b0ad777-8e71-4dfc-ac60-fe18406d1a5e";
 
 const fetchTranscript = async (audioFile) => {
   // Initialize the Deepgram SDK
-  const deepgram = new Deepgram(deepgramApiKey);
+  const deepgram = new Deepgram(process.env.DG_SECRET_KEY);
 
   source = {
     buffer: audioFile.buffer,
