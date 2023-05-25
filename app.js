@@ -17,10 +17,9 @@ app.post("/gus", async (req, res) => {
     }
 
     // Use the path, originalname, and mimetype to send the file in the API request to Deepgram
-    const transcript = await fetchTranscript(audioFile);
-
+    const transcriptResponse = await fetchTranscript(audioFile);
     // Return the transcript or do something else with it
-    res.send(transcript);
+    res.send(transcriptResponse);
   } catch (err) {
     console.error('Failed to fetch recording summary', err);
     res.status(500).send('Internal server error.');

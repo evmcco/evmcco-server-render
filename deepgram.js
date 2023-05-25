@@ -10,22 +10,16 @@ const fetchTranscript = async (audioFile) => {
   };
 
   // Send the audio to Deepgram and get the response
-  deepgram.transcription
-    .preRecorded(source, {
+  try {
+    const response = await deepgram.transcription.preRecorded(source, {
       punctuate: true,
       model: "nova",
     })
-    .then((response) => {
-      // Write the response to the console
-      // console.dir(response, { depth: null });
-
-      // Write only the transcript to the console
-      console.dir(response.results.channels[0].alternatives[0].transcript, { depth: null });
-      return response.results.channels[0].alternatives[0].transcript;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    return response.results.channels[0].alternatives[0].transcript;
+  } catch(err) {
+    console.log(err);
+    return err
+  }
 }
 
 module.exports = { fetchTranscript };
